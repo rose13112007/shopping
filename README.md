@@ -67,7 +67,7 @@ button:hover {
 .cart h2 {
   text-align: center;
 }
-</style></head><body><header>🛒 DineshRoja Shopping Website</header><div class="products" id="productList"></div><div class="cart">
+</style></head><body><header> DineshRoja Shopping Website</header><div class="products" id="productList"></div><div class="cart">
   <h2>Cart</h2>
   <ul id="cartItems"></ul>
   <h3>Total: ₹<span id="total">0</span></h3>

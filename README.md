@@ -1,129 +1,228 @@
-# <!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> EC RD shoping websit</title><style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShopEasy Premium</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-header {
-  background: #0d47a1;
-  color: white;
-  padding: 15px;
-  text-align: center;
-  font-size: 24px;
-}
+    body {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      min-height: 100vh;
+    }
 
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
+    header {
+      background: rgba(13, 71, 161, 0.95);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
 
-.card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-}
+    .top-bar input, .top-bar select {
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      width: 250px;
+      font-size: 16px;
+      outline: none;
+    }
 
-button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  background: #0d47a1;
-  color: white;
-  border-radius: 8px;
-  cursor: pointer;
-}
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
 
-button:hover {
-  background: #1565c0;
-}
+    .products-section {
+      flex: 3;
+    }
 
-.cart {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: white;
-  padding: 15px;
-  box-shadow: -4px 0 10px rgba(0,0,0,0.3);
-}
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
 
-.cart h2 {
-  text-align: center;
-}
-</style></head><body><header> EC RD Shopping Website</header><div class="products" id="productList"></div><div class="cart">
-  <h2>Cart</h2>
-  <ul id="cartItems"></ul>
-  <h3>Total: ₹<span id="total">0</span></h3>
-  <button onclick="checkout()">Checkout</button>
-</div><script>
-const products = [
-  {name: "Shoes", price: 1200, img: "https://via.placeholder.com/200"},
-  {name: "Watch", price: 800, img: "https://via.placeholder.com/200"},
-  {name: "Bag", price: 1500, img: "https://via.placeholder.com/200"},
-  {name: "Headphones", price: 2000, img: "https://via.placeholder.com/200"},
-  {name: "Mobile", price: 15000, img: "https://via.placeholder.com/200"}
-];
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
 
-let cart = [];
+    .card:hover {
+      transform: translateY(-8px);
+    }
 
-function displayProducts() {
-  let html = "";
-  products.forEach((p, index) => {
-    html += `
-      <div class="card">
-        <img src="${p.img}">
-        <h3>${p.name}</h3>
-        <p>₹${p.price}</p>
-        <button onclick="addToCart(${index})">Add to Cart</button>
-      </div>`;
-  });
-  document.getElementById("productList").innerHTML = html;
-}
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
 
-function addToCart(index) {
-  cart.push(products[index]);
-  updateCart();
-}
+    .card-content {
+      padding: 15px;
+      text-align: center;
+    }
 
-function updateCart() {
-  let list = "";
-  let total = 0;
-  cart.forEach(item => {
-    list += `<li>${item.name} - ₹${item.price}</li>`;
-    total += item.price;
-  });
+    .card h3 {
+      color: #0d47a1;
+      margin-bottom: 8px;
+    }
 
-  document.getElementById("cartItems").innerHTML = list;
-  document.getElementById("total").innerText = total;
-}
+    .card p {
+      margin: 5px 0;
+      color: #333;
+    }
 
-function checkout() {
-  if(cart.length === 0) {
-    alert("Cart is empty!");
-  } else {
-    alert("✅ Your order has been placed successfully!");
-    cart = [];
-    updateCart();
-  }
-}
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      color: #1565c0;
+    }
 
-displayProducts();
-</script></body>
-</html>
+    .card button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      background: #0d47a1;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card button:hover {
+      background: #1565c0;
+    }
+
+    .cart {
+      flex: 1;
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      height: fit-content;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      position: sticky;
+      top: 100px;
+    }
+
+    .cart h2 {
+      text-align: center;
+      color: #0d47a1;
+      margin-bottom: 15px;
+    }
+
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .cart-item button {
+      margin-top: 5px;
+      padding: 6px 10px;
+      border: none;
+      background: crimson;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .total {
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      color: #0d47a1;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      border: none;
+      background: green;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .checkout-btn:hover {
+      background: darkgreen;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .cart {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>🛒 ShopEasy Premium Shopping Website</header>
+
+  <div class="top-bar">
+    <input type="text" id="searchInput" placeholder="Search products..." onkeyup="filterProducts()" />
+    <select id="categoryFilter" onchange="filterProducts()">
+      <option value="All">All Categories</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Accessories">Accessories</option>
+      <option value="Electronics">Electronics</option>
+    </select>
+  </div>
+
+  <div class="container">
+    <div class="products-section">
+      <div class="products" id="productList"></div>
+    </div>
+
+    <div class="cart">
+      <h2>Cart</h2>
+      <div id="cartItems"></div>
+      <div class="total">Total: ₹<span id="total">0</span></div>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      {
+        name: "Running Shoes",
+        price: 1200,
+        category: "Fashion",
+        img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        name: "Luxury Watch",
+        price: 1800,
+        category: "Accessories",
+        img: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=500&q=80"
+      },
+      {
+        name
